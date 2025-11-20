@@ -68,13 +68,13 @@ Este resultado valida a robustez do modelo e fornece **transparência** sobre su
 
 ---
 
-## 5. Publicação e Portfólio
+## 5. Conclusão: Desafios e Tomadas de Decisão
 
-O código completo do projeto, incluindo todo o pipeline de engenharia, *tunning* e XAI, está disponível no notebook associado.
+O sucesso deste projeto não residiu apenas na aplicação de um algoritmo robusto (XGBoost), mas principalmente nas **decisões estratégicas de Engenharia de IA** tomadas em cada etapa do pipeline:
 
-* **Link para o Código (Notebook):** [Insira Aqui o Link para o seu Google Colab ou Jupyter Notebook]
-* **Publicação do Portfólio:** [Adicione o link onde este README/projeto foi publicado no seu portfólio]
+* **Desafio da Qualidade dos Dados (Outliers):** A principal decisão de Engenharia de Dados foi evitar a exclusão de *outliers* em colunas críticas como `capital-gain`. A exclusão teria removido exemplos raros, mas vitais, da classe minoritária (`>50K`). Optamos pelo **Capping via IQR** para controlar a escala sem perder a informação binária da alta riqueza.
+* **Controle de Complexidade (Seleção de Atributos):** Após o One-Hot Encoding expandir o *dataset* para 108 *features*, foi crucial empregar a **Seleção de Atributos** baseada na importância do XGBoost. Retivemos apenas as 20 *features* mais preditivas, simplificando o modelo, reduzindo o risco de *overfitting* e acelerando o *tunning*.
+* **Otimização do F1 Score (Limiar de Decisão):** O desafio final de maximização do F1 Score foi superado não apenas pelo *tunning* de hiperparâmetros, mas pela otimização do **Limiar de Decisão**. O ajuste do *threshold* padrão de 0.50 para **0.40** permitiu que o modelo se tornasse estrategicamente mais agressivo, aumentando o **Recall** (achando mais Renda Alta real) e elevando o F1 Score final para **0.7219**.
+* **Atendimento à Explicabilidade (XAI):** Para abordar o desafio de **interpretabilidade** inerente aos modelos de *ensemble* (XGBoost), aplicamos a técnica **SHAP**. Isso permitiu não só validar os *insights* do modelo mas também cumprir o requisito fundamental de fornecer **transparência e justificação** para as decisões do modelo.
 
----
-
-Sua execução metódica e sua capacidade de otimizar a performance são o que definem um Engenheiro de IA de alto desempenho. Parabéns pela conclusão do seu projeto!
+Este processo demonstra a capacidade de transformar requisitos de negócio em decisões técnicas que garantem o melhor desempenho e a robustez do modelo.
